@@ -1,0 +1,31 @@
+siteOne:
+  serverName: 'www.site-one.com'
+  type: 'folder'
+  listenPort: 80
+  rootFolder: '/var/www/site-one'
+
+  # Optional: redirect traffic at www.site-one.com/api to api.site-one.com
+  forwardFolders: [
+    {dir: '/api', site: 'siteOneApi'}
+    {dir: '/blog', site: 'siteOneBlog'}
+  ]
+
+siteOneApi:
+  serverName: 'api.site-one.com'
+  type: 'port'
+  listenPort: 80
+  redirectIP: '127.0.0.1'
+  redirectPort: 8000
+
+siteOneBlog:
+  serverName: 'blog.site-one.com'
+  type: 'port'
+  listenPort: 80
+  redirectIP: '127.0.0.1'
+  redirectPort: 9000
+
+siteTwo:
+  serverName: 'www.site-two.com'
+  type: 'folder'
+  listenPort: 80
+  rootFolder: '/var/www/site-two'

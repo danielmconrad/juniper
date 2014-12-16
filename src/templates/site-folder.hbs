@@ -1,0 +1,17 @@
+server {
+  listen {{listenPort}};
+  server_name {{serverName}};
+  root {{rootFolder}};
+  index {{indexFile}};
+
+  location / {
+    try_files $uri;
+  }
+
+  {{#if redirectSubFolder}}
+  location ~* ^/{{slug}}/(.*) {
+    proxy_set_header HOST {{serverName}};
+    proxy_pass http://{{redirectIP}}:{{redirectPort}}/$1$is_args$args;
+  }
+  {{/if}}
+}

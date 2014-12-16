@@ -1,0 +1,37 @@
+{
+  "name": "juniper",
+  "version": "0.0.1",
+  "description": "An nginx based multi-environment server",
+  "main": "lib/cli/index.js",
+  "bin": {
+    "juniper": "lib/bin/juniper.js"
+  },
+  "preferGlobal": "true",
+  "scripts": {
+    "start": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danmconrad/juniper.git"
+  },
+  "keywords": [],
+  "author": "Dan Conrad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danmconrad/juniper/issues"
+  },
+  "homepage": "https://github.com/danmconrad/juniper",
+  "dependencies": {
+    "colors": "^1.0.3",
+    "cson": "^1.6.2",
+    "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.8.0",
+    "gulp": "^3.8.10",
+    "gulp-coffee": "^2.2.0",
+    "gulp-handlebars": "^3.0.1",
+    "gulp-util": "^3.0.1",
+    "gulp-wrap": "^0.5.0"
+  }
+}
