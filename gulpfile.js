@@ -1,2 +1,2 @@
 require('coffee-script/register');
-require('./tasks');
+require('./task');

@@ -8,22 +8,22 @@ wrap = require 'gulp-wrap'
 # Main
 gulp.task 'dev', ['build', 'link', 'watch'], ->
 
-gulp.task 'build', ['build-coffee', 'buld-hbs', 'build-copy'], ->
+gulp.task 'build', ['build:coffee', 'build:hbs', 'build:copy'], ->
 
-gulp.task 'build-coffee', ->
+gulp.task 'build:coffee', ->
   source = gulp.src 'src/**/*.coffee'
   stream = coffee({bare: true}).on 'error', gutil.log
   output = gulp.dest 'lib'
   source.pipe(stream).pipe(output)
 
-gulp.task 'buld-hbs', ->
+gulp.task 'build:hbs', ->
   source = gulp.src 'src/**/*.hbs'
   stream = handlebars()
   wrapper = wrap 'module.exports = <%= contents %>'
   output = gulp.dest 'lib'
   source.pipe(stream).pipe(wrapper).pipe(output)
 
-gulp.task 'build-copy', ->
+gulp.task 'build:copy', ->
   sources = [
     'src/**/*.json'
     'src/**/*.js'

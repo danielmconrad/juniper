@@ -52,52 +52,49 @@ Usage
   Actions:
 
     create <project>    Create a new folder and init it as a juniper project.
-    init                Initalize juniper based on config.
-    start               Write nginx config, start server, start nginx.
-    restart             Write nginx config, restart server, restart nginx.
-    upstart             Pull repos, restart.
-    destroy             Stop servers, remove all sites from nginx, stop nginx.
+
+    init <project?>     Initalize Juniper
+                         * Create repos
+
+    start <project?>    Start Juniper
+                         * Write nginx sites
+                         * Start apps
+                         * Start nginx
+
+    stop <project?>     Stop Juniper
+                         * Stop apps
+                         * Stop nginx
+
+    restart <project?>  Restart Juniper
+                         * Write nginx sites
+                         * Stop apps
+                         * Stop nginx
+                         * Start apps
+                         * Start nginx
+
+    update <project?>   Update all apps, restart
+                         * Write nginx sites
+                         * Stop apps
+                         * Stop nginx
+                         * Remove orphan repos
+                         * Init new repos
+                         * Pull repos
+                         * Start apps
+                         * Start nginx
+
+    destroy <project?>  Remove all settings, stop all services
+                         * Stop apps
+                         * Stop nginx
+                         * Remove repos
 
   Options:
 
     -h, --help          output usage information
     -V, --version       output the version number
     -f, --force         suppress warnings about existing files/folders
-
 ```
 
 Configuration
 -------------
 ```cson
-siteOne:
-  serverName: 'www.site-one.com'
-  type: 'folder'
-  listenPort: 80
-  rootFolder: '/var/www/site-one'
-
-  # Optional: redirect traffic at www.site-one.com/api to api.site-one.com
-  forwardFolders: [
-    {dir: '/api', site: 'siteOneApi'}
-    {dir: '/blog', site: 'siteOneBlog'}
-  ]
-
-siteOneApi:
-  serverName: 'api.site-one.com'
-  type: 'port'
-  listenPort: 80
-  redirectIP: '127.0.0.1'
-  redirectPort: 8000
-
-siteOneBlog:
-  serverName: 'blog.site-one.com'
-  type: 'port'
-  listenPort: 80
-  redirectIP: '127.0.0.1'
-  redirectPort: 9000
-
-siteTwo:
-  serverName: 'www.site-two.com'
-  type: 'folder'
-  listenPort: 80
-  rootFolder: '/var/www/site-two'
 ```

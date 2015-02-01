@@ -1,0 +1,9 @@
+server {
+  listen {{port}};
+  server_name {{domain}};
+
+  location / {
+    proxy_pass $scheme://{{process.address}}:{{process.port}};
+    proxy_set_header Host $host;
+  }
+}

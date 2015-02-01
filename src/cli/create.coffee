@@ -10,12 +10,13 @@ module.exports = (actionArgs) ->
   newFolder = "#{folder}/#{projectName}"
 
   onAnswer = ->
-    init [newFolder, '-f']
+    makeFolder newFolder, ->
+      init [newFolder, '-f']
 
   if fs.existsSync(newFolder)
     askToContinue(onAnswer)
   else
-    makeFolder()
+    onAnswer()
 
 askToContinue = (onAnswer) ->
   warning = 'Project folder already exists.'
@@ -25,8 +26,8 @@ askToContinue = (onAnswer) ->
     return logger.warning 'Exiting.' unless yep
     onAnswer()
 
-makeFolder = (newFolder) ->
+makeFolder = (newFolder, cb) ->
   fs.mkdir newFolder, (err) ->
     return logger.error 'Could not create folder.' if err
     logger.success 'Project folder created.'
-    init [newFolder]
+    cb()

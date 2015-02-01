@@ -1,0 +1,17 @@
+server {
+  listen {{port}};
+  server_name {{domain}};
+  root {{root}};
+  index {{files.index}};
+
+  location / {
+    try_files $uri;
+  }
+
+  {{#each files.redirects}}
+  location ~* ^/{{dir}}/(.*) {
+    proxy_set_header HOST {{domain}};
+    proxy_pass http://{{process.address}}:{{process.port}}/$1$is_args$args;
+  }
+  {{/each}}
+}

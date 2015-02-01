@@ -2,9 +2,8 @@
   "name": "juniper",
   "version": "0.0.1",
   "description": "An nginx based multi-environment server",
-  "main": "lib/cli/index.js",
   "bin": {
-    "juniper": "lib/bin/juniper.js"
+    "juniper": "lib/bin/index.js"
   },
   "preferGlobal": "true",
   "scripts": {
