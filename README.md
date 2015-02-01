@@ -53,39 +53,29 @@ Usage
 
     create <project>    Create a new folder and init it as a juniper project.
 
-    init <project?>     Initalize Juniper
+    init <project?>     Initalize project.
+
+    install             Install the dependencies of this project.
                          * Create repos
+                         * Create nginx
 
-    start <project?>    Start Juniper
-                         * Write nginx sites
+    start               Start project
+                         * Write nginx
                          * Start apps
                          * Start nginx
 
-    stop <project?>     Stop Juniper
+    stop                Stop project
                          * Stop apps
                          * Stop nginx
 
-    restart <project?>  Restart Juniper
-                         * Write nginx sites
-                         * Stop apps
-                         * Stop nginx
-                         * Start apps
-                         * Start nginx
+    restart             Restart project
+                        [stop, start]
 
-    update <project?>   Update all apps, restart
-                         * Write nginx sites
-                         * Stop apps
-                         * Stop nginx
-                         * Remove orphan repos
-                         * Init new repos
-                         * Pull repos
-                         * Start apps
-                         * Start nginx
-
-    destroy <project?>  Remove all settings, stop all services
+    destroy             Remove all settings, stop all services
                          * Stop apps
                          * Stop nginx
                          * Remove repos
+                         * Remove nginx
 
   Options:
 
@@ -94,7 +84,3 @@ Usage
     -f, --force         suppress warnings about existing files/folders
 ```
 
-Configuration
--------------
-```cson
-```

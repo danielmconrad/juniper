@@ -1,5 +1,5 @@
 fs = require 'fs'
-{ask, logger} = require '../util'
+{ask, logger} = require '../utils'
 init = require './init'
 
 module.exports = (actionArgs) ->

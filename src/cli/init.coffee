@@ -1,5 +1,5 @@
 fs = require 'fs'
-{ask, has, logger} = require '../util'
+{ask, has, logger} = require '../utils'
 configTemplate = require '../templates/config.cson.js'
 
 module.exports = (actionArgs) ->
@@ -8,7 +8,7 @@ module.exports = (actionArgs) ->
 
   forceOverwrite = has actionArgs, ['-f', '--force']
   file = "#{folder}/config.cson"
-  content = configTemplate.main()
+  content = configTemplate()
 
   onAnswer = ->
     writeFile(file, content)

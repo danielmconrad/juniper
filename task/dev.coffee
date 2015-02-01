@@ -1,25 +1,32 @@
 gulp = require 'gulp'
 gutil = require 'gulp-util'
 coffee = require 'gulp-coffee'
+clean = require 'gulp-clean'
 handlebars = require 'gulp-handlebars'
+defineModule = require 'gulp-define-module'
 wrap = require 'gulp-wrap'
 {exec} = require 'child_process'
 
 # Main
 gulp.task 'dev', ['build', 'link', 'watch'], ->
 
-gulp.task 'build', ['build:coffee', 'build:hbs', 'build:copy'], ->
+gulp.task 'build', ['build:clean', 'build:coffee', 'build:hbs', 'build:copy'], ->
 
-gulp.task 'build:coffee', ->
+gulp.task 'build:clean', (cb) ->
+  exec 'rm -rf lib', (err, stdout, stderr) ->
+    console.log 'stderr: ', stderr if stderr
+    cb err
+
+gulp.task 'build:coffee', ['build:clean'], ->
   source = gulp.src 'src/**/*.coffee'
   stream = coffee({bare: true}).on 'error', gutil.log
   output = gulp.dest 'lib'
   source.pipe(stream).pipe(output)
 
-gulp.task 'build:hbs', ->
+gulp.task 'build:hbs', ['build:clean'], ->
   source = gulp.src 'src/**/*.hbs'
   stream = handlebars()
-  wrapper = wrap 'module.exports = <%= contents %>'
+  wrapper = defineModule 'node'
   output = gulp.dest 'lib'
   source.pipe(stream).pipe(wrapper).pipe(output)
 
