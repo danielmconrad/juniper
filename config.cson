@@ -1,0 +1,22 @@
+defaults:
+  site:
+    all:
+      domain: null
+      repo: null
+      branch: 'master'
+      port: 80
+      type: 'files'
+      install: null
+      start: null
+      stop: null
+      files: {}
+      process: null
+
+    files:
+      index: 'index.html index.htm'
+      redirects: []
+      root: null
+
+    process:
+      port: null
+      address: '127.0.0.1'

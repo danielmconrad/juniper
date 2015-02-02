@@ -26,8 +26,8 @@ askToContinue = (onAnswer) ->
     return logger.warning 'Exiting.' unless yep
     onAnswer()
 
-makeFolder = (newFolder, cb) ->
+makeFolder = (newFolder, done) ->
   fs.mkdir newFolder, (err) ->
     return logger.error 'Could not create folder.' if err
     logger.success 'Project folder created.'
-    cb()
+    done()

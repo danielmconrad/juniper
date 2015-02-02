@@ -3,10 +3,8 @@ fs = require 'fs'
 configTemplate = require '../templates/config.cson.js'
 
 module.exports = (actionArgs) ->
-  [folder] = actionArgs
-  folder ?= process.cwd()
-
   forceOverwrite = has actionArgs, ['-f', '--force']
+  folder = process.cwd()
   file = "#{folder}/config.cson"
   content = configTemplate()
 

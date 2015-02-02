@@ -51,31 +51,14 @@ Usage
 
   Actions:
 
-    create <project>    Create a new folder and init it as a juniper project.
-
-    init <project?>     Initalize project.
-
-    install             Install the dependencies of this project.
-                         * Create repos
-                         * Create nginx
-
+    create <project>    Create a new folder and init it as a juniper project
+    init                Initalize project
+    install             Install the dependencies of this project
     start               Start project
-                         * Write nginx
-                         * Start apps
-                         * Start nginx
-
     stop                Stop project
-                         * Stop apps
-                         * Stop nginx
-
     restart             Restart project
-                        [stop, start]
-
-    destroy             Remove all settings, stop all services
-                         * Stop apps
-                         * Stop nginx
-                         * Remove repos
-                         * Remove nginx
+    remove              Remove all settings, stop all services
+    update              Stop, update sites, and restart
 
   Options:
 
