@@ -38,6 +38,7 @@ Installation
 
   # Start your server
   $ cd my-sites
+  $ juniper install
   $ juniper start
 ```
 
