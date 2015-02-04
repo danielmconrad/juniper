@@ -3,8 +3,13 @@ clone = require 'clone'
 CSON = require 'cson'
 
 juniper = CSON.parseFileSync "#{__dirname}/../../config.cson"
-project = CSON.parseFileSync "#{process.cwd()}/config.cson"
 dir = process.cwd()
+
+try
+  # The project may not yet exist
+  project = CSON.parseFileSync "#{process.cwd()}/config.cson"
+catch e
+
 
 getFormattedSite = (name) ->
   formattedSite = clone project.sites[name]
