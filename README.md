@@ -4,14 +4,16 @@ Juniper
 An nginx based multi-environment server.
 
 ### When and why would I want to use Juniper?
+Hosting ain't cheap, and running several sites from ones server takes a ton of work. Juniper makes things less painful.
+
 Let's say you want to serve out flat files for your site, run a node api on a subdomain, and redirect traffic from a subfolder to that subdomain. Well, this is perfect for you.
 
-With Juniper, you can run all of these silultaneously:
+With Juniper, you can run all of these simultaneously:
   * http://www.yoursite.com
   * http://api.yoursite.com
   * http://www.yoursite.com/api
 
-To add a new site to your server, just add a new key in the configuration file. Voila!
+To add a new site to your server, just add a new key in the configuration file, restart, and voila!
 
 ### When and why would I NOT want to use Juniper?
 It's generally bad practice to run multiple environments (uat, production, etc.) on a single server, it means if that server goes down all of your sites are down. But sometimes you're on a budget, and don't want to use something like [Heroku](https://www.heroku.com/), which may require you to pay for multiple add-on services.
@@ -48,7 +50,7 @@ Usage
 ```
   $ juniper -h
 
-  Usage: juniper [action] [options]
+  Usage: juniper [action [options]]
 
   Actions:
 
@@ -65,7 +67,6 @@ Usage
 
     -h, --help          output usage information
     -V, --version       output the version number
-    -f, --force         suppress warnings about existing files/folders
 ```
 
 
