@@ -38,5 +38,9 @@
     "gulp-handlebars": "^3.0.1",
     "gulp-util": "^3.0.1",
     "gulp-wrap": "^0.5.0"
+  },
+  "scripts": {
+    "pretest": "gulp build",
+    "test": "mocha"
   }
 }
