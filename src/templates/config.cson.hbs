@@ -39,9 +39,11 @@ sites:
     domain: 'www.juniper-site-process.com'
     repo: 'https://github.com/danmconrad/juniper-site-process.git'
 
+    start: 'forever start ./index.js'
+    stop: 'forever stop ./index.js'
     type: 'process'
     process:
-      port: 8000
+      port: 1337
 
 
   # Serving a static site with redirected sub-folders

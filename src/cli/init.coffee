@@ -2,16 +2,15 @@ fs = require 'fs'
 {ask, has, logger} = require '../utils'
 configTemplate = require '../templates/config.cson.js'
 
-module.exports = (actionArgs) ->
-  forceOverwrite = has actionArgs, ['-f', '--force']
-  folder = process.cwd()
-  file = "#{folder}/config.cson"
+module.exports = (done) ->
+  file = "#{process.cwd()}/config.cson"
   content = configTemplate()
 
   onAnswer = ->
     writeFile(file, content)
+    done() if done?
 
-  if fs.existsSync(file) and not forceOverwrite
+  if fs.existsSync(file)
     askToContinue(onAnswer)
   else
     onAnswer()

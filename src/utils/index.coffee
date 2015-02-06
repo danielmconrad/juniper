@@ -3,3 +3,4 @@ module.exports =
   config: require './config'
   has: require './has'
   logger: require './logger'
+  doneErrHandler: require './doneErrHandler'

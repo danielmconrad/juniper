@@ -54,12 +54,12 @@ Usage
 
     create <project>    Create a new folder and init it as a juniper project
     init                Initalize project
-    install             Install the dependencies of this project
-    start               Start project
-    stop                Stop project
-    restart             Restart project
-    remove              Remove all settings, stop all services
-    update              Stop, update sites, and restart
+    install <siteName>  Install the dependencies of this project or site
+    start <siteName>    Start project or site
+    stop <siteName>     Stop project or site
+    restart <siteName>  Restart project or site
+    remove <siteName>   Remove all settings, stop all services for this project or site
+    update <siteName>   Stop, update, and restart project or site
 
   Options:
 
@@ -67,4 +67,5 @@ Usage
     -V, --version       output the version number
     -f, --force         suppress warnings about existing files/folders
 ```
+
 

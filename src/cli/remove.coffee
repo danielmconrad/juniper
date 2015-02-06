@@ -1,44 +1,28 @@
-repos = require '../tasks/repos'
-nginx = require '../tasks/nginx'
+{nginx, repos} = require '../tasks'
 {ask, logger} = require '../utils'
-{series} = require 'async'
+{applyEach, series} = require 'async'
+{remove} = require 'fs-extra'
 {exec} = require 'child_process'
-{config, logger} = require '../utils'
 
-module.exports = ->
+module.exports = (siteName, done) ->
 
-  warning = 'This will stop all services and delete the project.'
-  question = 'Are you sure you want to delete the project?'
+  if siteName?
+    applyEach [
+      repos.stopOne
+      nginx.stopOne
+      nginx.removeOne
+      repos.removeOne
+    ], siteName, -> done?()
 
-  ask.yesOrNo {warning, question}, (yep) ->
-    return logger.warning 'Exiting.' unless yep
+  else
+    warning = 'This will stop all services and delete the project.'
+    question = 'Are you sure you want to delete the project?'
 
-    series [
-      (cb) ->
-        logger.info 'Stopping project repos...'
-        repos.stop (err) ->
-          return logger.error err if err
-          logger.success 'Project repos stopped.'
-          cb()
-      (cb) ->
-        logger.info 'Stopping project nginx...'
-        nginx.stop (err) ->
-          return logger.error err if err
-          logger.success 'Project nginx stopped.'
-          cb()
-      (cb) ->
-        logger.info 'Removing project repos...'
-        repos.remove (err) ->
-          return logger.error err if err
-          logger.success 'Project repos removed.'
-          cb()
-      # (cb) ->
-      #   logger.info 'Removing project nginx...'
-      #   nginx.remove (err) ->
-      #     return logger.error err if err
-      #     logger.success 'Project nginx removed.'
-      #     cb()
-      (cb) ->
-        logger.info 'Removing project'
-        exec "rm -rf #{config.dir}", -> cb()
-    ]
+    removeProject = (cb) ->
+      logger.info 'Removing project'
+      remove process.cwd(), cb
+
+    ask.yesOrNo {warning, question}, (yep) ->
+      return logger.warning 'Exiting.' unless yep
+
+      series [repos.stop, nginx.stop, removeProject], -> done?()

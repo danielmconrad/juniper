@@ -2,8 +2,9 @@
 {series} = require 'async'
 {exec} = require 'child_process'
 {writeFile, writeFileSync} = require 'fs'
-os = require 'os'
-{config, logger} = require '../utils'
+{mkdirp, remove} = require 'fs-extra'
+{platform} = require 'os'
+{config, logger, doneErrHandler} = require '../utils'
 
 linuxConfTemplate = require '../templates/nginx.conf.linux'
 macConfTemplate = require '../templates/nginx.conf.mac'
@@ -13,23 +14,29 @@ processSiteTemplate = require '../templates/site.process'
 
 module.exports =
   install: (done) ->
+    logger.started 'Installing all project nginx...'
     asyncActions = []
-    asyncActions.push @remove
-    asyncActions.push @installDir
-    asyncActions.push @installConf
-    asyncActions.push partial(@installOne, site) for site of config.project.sites
-    series asyncActions, logger.checkForError(done)
+    asyncActions.push module.exports.remove
+    asyncActions.push module.exports.installDir
+    asyncActions.push module.exports.installConf
+
+    for name of config.project.sites
+      asyncActions.push partial(module.exports.installOne, name)
+
+    series asyncActions, doneErrHandler(done, 'Project nginx installed.')
 
   installOne: (name, done) ->
+    logger.started "Installing site nginx for #{name}"
     site = config.project.getFormattedSite name
     template = if site.process? then processSiteTemplate else filesSiteTemplate
-    writeFile "nginx/sites-available/#{name}", template(site), logger.checkForError(done)
+
+    writeFile "nginx/sites-available/#{name}", template(site), doneErrHandler(done)
 
   installDir: (done) ->
-    exec 'mkdir nginx && mkdir nginx/sites-available', done
+    mkdirp 'nginx/sites-available', done
 
   installConf: (done) ->
-    confTemplate = switch os.platform()
+    confTemplate = switch platform()
       when 'darwin' then macConfTemplate
       when 'linux' then linuxConfTemplate
 
@@ -37,13 +44,30 @@ module.exports =
     writeFileSync 'nginx/mime.types', mimeTypesTemplate(config)
     writeFileSync 'nginx/error.log'
     writeFileSync 'nginx/access.log'
+
     done()
 
+  remove: (done) ->
+    remove 'nginx', (err) -> done()
+
+  removeOne: (name, done) ->
+    remove "nginx/sites-available/#{name}", (err) -> done()
+
   start: (done) ->
-    exec "sudo nginx -c #{config.dir}/nginx/nginx.conf", logger.checkForError(done)
+    logger.started 'Starting project nginx...'
+    handler = doneErrHandler(done)
+
+    exec "sudo nginx -c #{config.dir}/nginx/nginx.conf", handler
+
+  startOne: (name, done) -> module.exports.start done
 
   stop: (done) ->
-    exec "sudo nginx -s stop", -> done() #logger.checkForError(done)
+    logger.started 'Stopping project nginx...'
 
-  remove: (done) ->
-    exec 'rm -rf nginx', logger.checkForError(done)
+    exec 'sudo nginx -s stop', ->
+      logger.success 'Done!'
+      done()
+
+  stopOne: (name, done) ->
+    console.log 'TODO: Stopping one nginx site'
+    done()

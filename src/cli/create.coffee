@@ -2,32 +2,22 @@ fs = require 'fs'
 {ask, logger} = require '../utils'
 init = require './init'
 
-module.exports = (actionArgs) ->
+module.exports = (actionArgs, done) ->
   return logger.error 'Please provide a project name.' unless actionArgs.length
 
   [projectName] = actionArgs
-  folder = process.cwd()
-  newFolder = "#{folder}/#{projectName}"
+  newFolder = "#{process.cwd()}/#{projectName}"
 
-  onAnswer = ->
-    makeFolder newFolder, ->
-      init [newFolder, '-f']
+  next = ->
+    process.chdir newFolder
+    init done
 
   if fs.existsSync(newFolder)
-    askToContinue(onAnswer)
+    next()
   else
-    onAnswer()
+    fs.mkdir newFolder, (err) ->
+      return logger.error 'Could not create folder.' if err
+      logger.success 'Project folder created.'
+      next()
 
-askToContinue = (onAnswer) ->
-  warning = 'Project folder already exists.'
-  question = 'Would you like to overwrite the folder?'
 
-  ask.yesOrNo {warning, question}, (yep) ->
-    return logger.warning 'Exiting.' unless yep
-    onAnswer()
-
-makeFolder = (newFolder, done) ->
-  fs.mkdir newFolder, (err) ->
-    return logger.error 'Could not create folder.' if err
-    logger.success 'Project folder created.'
-    done()

@@ -3,9 +3,9 @@ colors = require 'colors'
 colors.setTheme
   debug: 'blue'
   error: 'red'
-  info: 'grey'
+  info: 'yellow'
   juniper: 'green'
-  started: 'yellow'
+  started: 'grey'
   success: 'green'
   warning: 'magenta'
 
@@ -27,8 +27,3 @@ module.exports =
 
   warning: ->
     console.log "[juniper-warning]  ".warning, arguments...
-
-  checkForError: (done) ->
-    (err) =>
-      return @error err if err
-      done()
