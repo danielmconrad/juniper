@@ -21,6 +21,8 @@ It's generally bad practice to run multiple environments (uat, production, etc.)
 ### Background & Reading
 * [Nginx Primer](http://blog.martinfjordvald.com/2010/07/nginx-primer/)
 
+### Upcoming Features
+Please refer to the [project wiki](https://github.com/danmconrad/juniper/wiki/Upcoming-Features) for more details.
 
 Installation
 ------------
@@ -70,3 +72,96 @@ Usage
 ```
 
 
+Config
+------
+
+```coffeescipt
+nginx:
+  mimetypes: []
+
+sites:
+
+  # DEFAULTS
+
+  # siteName:                           # Required
+    # domain: null                      # Required, string
+    # repo: null                        # Required, string
+    # branch: 'master'
+    # port: 80
+    # type: 'files'                     # string: 'files|process'
+
+    # install: null                     # string, ex: 'npm install', 'make setup'
+    # start: null                       # string, ex: 'npm start', 'grunt production', 'jake server:uat'
+    # stop: null                        # string, ex: 'npm stop', 'gulp stop'
+
+    # files:
+    #   index: 'index.html index.htm'
+    #   redirects: []                   # array: {dir, site}, limited to 'process' sites
+    #   root: null                      # relative to the repo folder
+
+    # process:
+    #   port: null                      # Required, int
+    #   address: '127.0.0.1'
+
+
+  # EXAMPLES
+
+  # Serving static files
+  simpleFiles:
+    domain: 'www.juniper-site-files.com'
+    repo: 'https://github.com/danmconrad/juniper-site-files.git'
+
+
+  # Running a node server
+  simpleProcess:
+    domain: 'www.juniper-site-process.com'
+    repo: 'https://github.com/danmconrad/juniper-site-process.git'
+
+    start: 'forever start ./index.js'
+    stop: 'forever stop ./index.js'
+    type: 'process'
+    process:
+      port: 1337
+
+
+  # Serving a static site with redirected sub-folders
+  filesWithApiAndBlog:
+    domain: 'www.files-with-api-and-blog.com'
+    repo: 'https://url-to-repo/files-with-api-and-blog.git'
+    redirects: [
+      {dir: '/api', site: 'api'}
+      {dir: '/blog', site: 'blog'}
+    ]
+
+  api:
+    domain: 'www.api.com'
+    repo: 'https://url-to-repo/api.git'
+    type: 'process'
+    process:
+      port: 6000
+
+  blog:
+    domain: 'www.blog.com'
+    repo: 'https://url-to-repo/blog.git'
+    type: 'process'
+    process:
+      port: 7000
+
+
+  # Serving two version of the same site
+  prodEmberCliSite:
+    domain: 'www.ember-cli-site.com'
+    repo: 'https://url-to-repo/ember-cli-site.git'
+    branch: 'master'
+    root: '/dist'
+    install: 'npm install && bower install'
+    start: 'ember build --environment=production'
+
+  uatEmberCliSite:
+    domain: 'uat.ember-cli-site.com'
+    repo: 'https://url-to-repo/ember-cli-site.git'
+    branch: 'develop'
+    root: '/dist'
+    install: 'npm install && bower install'
+    start: 'ember build --environment=uat'
+```

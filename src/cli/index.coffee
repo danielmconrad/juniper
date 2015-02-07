@@ -12,8 +12,8 @@ if action in ['create', 'init', 'install', 'start', 'stop', 'restart', 'remove',
 else
 
   switch action
-    when '-v' then console.log "v#{pack.version}"
-    when '-h' then console.log """
+    when '-v', '--version' then console.log "v#{pack.version}"
+    when '-h', '--help' then console.log """
 
     Usage: juniper [action [options]]
 

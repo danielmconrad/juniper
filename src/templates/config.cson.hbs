@@ -47,42 +47,42 @@ sites:
 
 
   # Serving a static site with redirected sub-folders
-  filesWithApiAndBlog:
-    domain: 'www.files-with-api-and-blog.com'
-    repo: 'https://url-to-repo/files-with-api-and-blog.git'
-    redirects: [
-      {dir: '/api', site: 'api'}
-      {dir: '/blog', site: 'blog'}
-    ]
+  # filesWithApiAndBlog:
+  #   domain: 'www.files-with-api-and-blog.com'
+  #   repo: 'https://url-to-repo/files-with-api-and-blog.git'
+  #   redirects: [
+  #     {dir: '/api', site: 'api'}
+  #     {dir: '/blog', site: 'blog'}
+  #   ]
 
-  api:
-    domain: 'www.api.com'
-    repo: 'https://url-to-repo/api.git'
-    type: 'process'
-    process:
-      port: 6000
+  # api:
+  #   domain: 'www.api.com'
+  #   repo: 'https://url-to-repo/api.git'
+  #   type: 'process'
+  #   process:
+  #     port: 6000
 
-  blog:
-    domain: 'www.blog.com'
-    repo: 'https://url-to-repo/blog.git'
-    type: 'process'
-    process:
-      port: 7000
+  # blog:
+  #   domain: 'www.blog.com'
+  #   repo: 'https://url-to-repo/blog.git'
+  #   type: 'process'
+  #   process:
+  #     port: 7000
 
 
   # Serving two version of the same site
-  prodEmberCliSite:
-    domain: 'www.ember-cli-site.com'
-    repo: 'https://url-to-repo/ember-cli-site.git'
-    branch: 'master'
-    root: '/dist'
-    install: 'npm install && bower install'
-    start: 'ember build --environment=production'
+  # prodEmberCliSite:
+  #   domain: 'www.ember-cli-site.com'
+  #   repo: 'https://url-to-repo/ember-cli-site.git'
+  #   branch: 'master'
+  #   root: '/dist'
+  #   install: 'npm install && bower install'
+  #   start: 'ember build --environment=production'
 
-  uatEmberCliSite:
-    domain: 'uat.ember-cli-site.com'
-    repo: 'https://url-to-repo/ember-cli-site.git'
-    branch: 'develop'
-    root: '/dist'
-    install: 'npm install && bower install'
-    start: 'ember build --environment=uat'
+  # uatEmberCliSite:
+  #   domain: 'uat.ember-cli-site.com'
+  #   repo: 'https://url-to-repo/ember-cli-site.git'
+  #   branch: 'develop'
+  #   root: '/dist'
+  #   install: 'npm install && bower install'
+  #   start: 'ember build --environment=uat'
