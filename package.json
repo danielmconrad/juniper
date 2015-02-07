@@ -1,6 +1,6 @@
 {
   "name": "juniper",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "An Nginx Multi-Environment Server",
   "bin": {
     "juniper": "lib/bin/index.js"

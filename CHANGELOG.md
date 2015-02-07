@@ -1,3 +1,8 @@
+0.0.5
+-----
+ef41249 update single site again functional
+5c90799 added note for nginx config in readme
+
 0.0.4
 -----
 614b641 fixed startOne
