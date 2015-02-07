@@ -77,6 +77,7 @@ Config
 
 ```cson
 nginx:
+  # Nginx config coming soon. See 'Upcoming Features'.
   mimetypes: []
 
 sites:
