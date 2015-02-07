@@ -3,6 +3,6 @@
 
 module.exports = (siteName, done) ->
   if siteName?
-    applyEach [nginx.stop, repos.startOne, nginx.startOne], siteName, -> done?()
+    applyEach [nginx.stopOne, repos.startOne, nginx.startOne], siteName, -> done?()
   else
     series [nginx.stop, repos.start, nginx.start], -> done?()

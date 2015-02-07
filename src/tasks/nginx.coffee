@@ -42,8 +42,8 @@ module.exports =
 
     writeFileSync 'nginx/nginx.conf', confTemplate(config)
     writeFileSync 'nginx/mime.types', mimeTypesTemplate(config)
-    writeFileSync 'nginx/error.log'
-    writeFileSync 'nginx/access.log'
+    writeFileSync 'nginx/error.log', ''
+    writeFileSync 'nginx/access.log', ''
 
     done()
 
@@ -68,6 +68,4 @@ module.exports =
       logger.success 'Done!'
       done()
 
-  stopOne: (name, done) ->
-    console.log 'TODO: Stopping one nginx site'
-    done()
+  stopOne: (name, done) -> module.exports.stop done
