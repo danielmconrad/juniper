@@ -75,7 +75,7 @@ Usage
 Config
 ------
 
-```coffeescipt
+```cson
 nginx:
   mimetypes: []
 
