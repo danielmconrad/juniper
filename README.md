@@ -1,7 +1,7 @@
 Juniper
 ========
 
-An nginx based multi-environment server.
+An Nginx Multi-Environment Server.
 
 ### When and why would I want to use Juniper?
 Hosting ain't cheap, and running several sites from ones server takes a ton of work. Juniper makes things less painful.
