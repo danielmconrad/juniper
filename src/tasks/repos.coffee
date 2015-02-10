@@ -20,6 +20,15 @@ module.exports =
     site = config.project.sites[name]
     exec "git clone #{site.repo} repos/#{name}", doneErrHandler(done)
 
+    return done() unless site.install
+
+    process.chdir site.files.root
+
+    exec site.install, (err) ->
+      return logger.error err if err
+      process.chdir config.dir
+      done()
+
   start: (done) ->
     logger.started 'Starting all project repos...'
     asyncActions = []

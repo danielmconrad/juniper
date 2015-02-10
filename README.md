@@ -1,5 +1,5 @@
 Juniper
-========
+=======
 
 An Nginx Multi-Environment Server.
 
@@ -154,7 +154,7 @@ sites:
     domain: 'www.ember-cli-site.com'
     repo: 'https://url-to-repo/ember-cli-site.git'
     branch: 'master'
-    root: '/dist'
+    root: 'dist'
     install: 'npm install && bower install'
     start: 'ember build --environment=production'
 
@@ -162,7 +162,7 @@ sites:
     domain: 'uat.ember-cli-site.com'
     repo: 'https://url-to-repo/ember-cli-site.git'
     branch: 'develop'
-    root: '/dist'
+    root: 'dist'
     install: 'npm install && bower install'
     start: 'ember build --environment=uat'
 ```
