@@ -1,3 +1,7 @@
+0.0.8
+-----
+fa394f3 async fix for install
+
 0.0.7
 -----
 20b45c8 built
