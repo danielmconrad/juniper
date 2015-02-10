@@ -28,7 +28,7 @@ module.exports =
   installOne: (name, done) ->
     logger.started "Installing site nginx for #{name}"
     site = config.project.getFormattedSite name
-    template = if site.process? then processSiteTemplate else filesSiteTemplate
+    template = if site.type is 'process' then processSiteTemplate else filesSiteTemplate
 
     writeFile "nginx/sites-available/#{name}", template(site), doneErrHandler(done)
 
