@@ -1,3 +1,7 @@
+0.0.9
+-----
+b381612 files fix
+
 0.0.8
 -----
 fa394f3 async fix for install
