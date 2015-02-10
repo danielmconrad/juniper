@@ -1,3 +1,7 @@
+0.0.10
+------
+db0ce16 switch template based on type not existence of process
+
 0.0.9
 -----
 b381612 files fix
