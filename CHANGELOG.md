@@ -1,3 +1,7 @@
+0.0.6
+-----
+bb30998 added site.install to installOne
+
 0.0.5
 -----
 ef41249 update single site again functional
