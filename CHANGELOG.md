@@ -1,3 +1,7 @@
+0.0.7
+-----
+20b45c8 built
+
 0.0.6
 -----
 bb30998 added site.install to installOne
