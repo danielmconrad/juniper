@@ -18,16 +18,16 @@ module.exports =
   installOne: (name, done) ->
     logger.started "Installing site repo for #{name}..."
     site = config.project.sites[name]
-    exec "git clone #{site.repo} repos/#{name}", doneErrHandler(done)
-
-    return done() unless site.install
-
-    process.chdir site.files.root
-
-    exec site.install, (err) ->
+    exec "git clone #{site.repo} repos/#{name}", (err) ->
       return logger.error err if err
-      process.chdir config.dir
-      done()
+      return done() unless site.install
+
+      process.chdir site.files.root
+
+      exec site.install, (err) ->
+        return logger.error err if err
+        process.chdir config.dir
+        done()
 
   start: (done) ->
     logger.started 'Starting all project repos...'
