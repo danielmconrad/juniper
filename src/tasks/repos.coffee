@@ -17,7 +17,8 @@ module.exports =
 
   installOne: (name, done) ->
     logger.started "Installing site repo for #{name}..."
-    site = config.project.sites[name]
+    site = config.project.getFormattedSite name
+
     exec "git clone #{site.repo} repos/#{name}", (err) ->
       return logger.error err if err
       return done() unless site.install

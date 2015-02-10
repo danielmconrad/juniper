@@ -14,10 +14,11 @@ catch e
 getFormattedSite = (name) ->
   formattedSite = clone project.sites[name]
   formattedSite.files ?= {}
+  formattedSite.process ?= {}
 
   defaults formattedSite, juniper.defaults.site.all
   defaults formattedSite.files, juniper.defaults.site.files
-  defaults formattedSite.process, juniper.defaults.site.process if formattedSite.process
+  defaults formattedSite.process, juniper.defaults.site.process
 
   if formattedSite.files.redirects?
     formattedRedirects = []
